@@ -1,0 +1,25 @@
+{
+  "name": "post-it",
+  "version": "1.0.0",
+  "description": "🗒️ Post-It App  Une mini-application permettant de créer et gérer des notes façon Post-it. Ce projet a été réalisé pour renforcer ma maîtrise du Frontend (HTML, CSS, JavaScript) tout en utilisant un backend simple avec Express.js et une base de données MongoDB.",
+  "homepage": "https://github.com/Jean-Romaric/Post-it#readme",
+  "bugs": {
+    "url": "https://github.com/Jean-Romaric/Post-it/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jean-Romaric/Post-it.git"
+  },
+  "license": "ISC",
+  "author": "Akpoué",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongodb": "^7.0.0"
+  }
+}
