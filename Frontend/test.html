@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Démo Événement Change</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
+        .log { background: #f4f4f4; padding: 10px; border: 1px solid #ddd; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <h3>1. Liste déroulante (Immédiat)</h3>
+    <select id="mon-select">
+        <option value="">--Choisissez une option--</option>
+        <option value="javascript">JavaScript</option>
+        <option value="python">Python</option>
+    </select>
+
+    <h3>2. Champ texte (Perte de focus)</h3>
+    <input type="text" id="mon-input" placeholder="Tapez puis cliquez ailleurs">
+
+    <h3>3. Case à cocher (Immédiat)</h3>
+    <label><input type="checkbox" id="ma-checkbox"> Accepter les conditions</label>
+
+    <div class="log">
+        <strong>Dernière action :</strong> <span id="output">Aucune</span>
+    </div>
+
+    <script>
+        const output = document.getElementById('output');
+
+        // Fonction pour afficher le résultat
+        const logChange = (message) => {
+            output.textContent = message;
+            console.log(message);
+        };
+
+        // Écouteur sur le SELECT
+        document.getElementById('mon-select').addEventListener('change', (e) => {
+            logChange(`Sélecteur : ${e.target.value}`);
+        });
+
+        // Écouteur sur l'INPUT (ne se lance que quand on quitte le champ)
+        document.getElementById('mon-input').addEventListener('change', (e) => {
+            logChange(`Input texte : ${e.target.value}`);
+        });
+
+        // Écouteur sur la CHECKBOX
+        document.getElementById('ma-checkbox').addEventListener('change', (e) => {
+            logChange(`Checkbox : ${e.target.checked ? 'Coché' : 'Décoché'}`);
+        });
+    </script>
+
+</body>
+</html>
