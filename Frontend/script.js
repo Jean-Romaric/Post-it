@@ -27,7 +27,7 @@ function addNote() {
 function createNoteElement(id, content) {
   const element = document.createElement("textarea");
   element.classList.add("note");
-  content =  element.value ;//recupère la valeur du textarea(**** ****)
+  element.value = content;//recupère la valeur du textarea(**** ****)
   //console.log(content) //chaine vide 
   //console.log(element.value)
 
