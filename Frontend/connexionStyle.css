@@ -17,7 +17,7 @@ html,body{
     position: relative;
     width: 421px;
     height: 427px;
-    margin: 200px auto;
+    margin: 132px auto;
     padding: 20px 40px 40px;
     text-align: center;
     background: #ffeb3b;
@@ -28,8 +28,8 @@ html,body{
 #output{
     position: absolute;
     width: 300px;
-    top: -75px;
-    left: 0;
+    top: -90px;
+    left: 63px;
     color: #fff;
 }
 
@@ -87,6 +87,7 @@ html,body{
     border: 2px solid #aaa;
     background-size: cover;
     background: #ccc;
+    cursor: pointer;
 }
 
 .form-box input{

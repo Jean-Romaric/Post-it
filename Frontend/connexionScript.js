@@ -1,45 +1,61 @@
  let input = document.querySelector("input");
- let button = document.querySelector("button")
+ let form = document.querySelector("form");
+ 
 
 const postData = async (url, data) => {
   try {
     const response = await fetch(url, {
-      method: 'POST', // Specify the method
+      method: 'POST',
       headers: {
-        'Content-Type': 'application/json' // Declare the data type
+        'Content-Type': 'application/json' 
       },
-      body: JSON.stringify(data) // Convert the JavaScript object to a JSON string
+      body: JSON.stringify(data) 
     });
 
     if (!response.ok) {
-      // Check for HTTP errors (e.g., 404, 500)
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const responseData = await response.json(); // Parse the response body as JSON
-    console.log('Success:', responseData); // Handle the successful response
+    const responseData = await response.json(); 
     return responseData;
 
   } catch (error) {
-    console.error('Error posting data:', error); // Handle network errors or those thrown above
+    console.error('Error posting data:', error); 
   }
 };
 
 
-button.addEventListener("click",(e)=>{
+form.addEventListener("submit",(e)=>{
     e.preventDefault();
-
-    let username = input.value
-    if(username == ""){
-        alert("Entrer un username svp !")
-        return
+    let username = input.value.trim();
+    if(username == "" ){
+      document.getElementById("output").innerHTML =
+       "<div class='alert alert-danger'>Entrer un username svp !</div>";
+      setTimeout(() => {
+       document.getElementById("output").innerHTML =
+       "";
+      }, 2000);
+      return
+    }
+    if(username.length > 10 ){
+       document.getElementById("output").innerHTML =
+       "<div class='alert alert-danger'>Entrer au minimum 10 lettres !</div>";
+      setTimeout(() => {
+       document.getElementById("output").innerHTML =
+       "";
+      }, 2000);
+      return
     }
     const apiEndpoint = 'http://localhost:3000/api/users'; 
     const myData = {
     username: `${username}`
     };
    postData(apiEndpoint, myData);
+   input.value = "";
 
+   setTimeout(() => {
+  window.location.replace("accueil.html");
+  }, 100);
 }) 
 
 

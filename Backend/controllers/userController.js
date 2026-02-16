@@ -12,7 +12,7 @@ const addUser = async (req, res)=>{
         ) //ici db() Retourne la base de données MongoDB "post-it"
         let result = await db().collection("users").insertOne(_user);
         console.log(result);
-        res.status(201).json({ userId: result.insertedId, nom: _user.nom, prenoms: _user.prenoms });
+        res.status(201).json({ userId: result.insertedId});
 
     } catch (error) {
         console.log(error);
