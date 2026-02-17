@@ -8,8 +8,7 @@ const e = require("express")
 const addUser = async (req, res)=>{
     try{
         let _user = new User(
-            req.body.nom, 
-            req.body.prenoms ,
+            req.body.username, 
         ) //ici db() Retourne la base de données MongoDB "post-it"
         let result = await db().collection("users").insertOne(_user);
         console.log(result);
