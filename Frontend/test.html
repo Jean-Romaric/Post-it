@@ -1,56 +1,48 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Démo Événement Change</title>
-    <style>
-        body { font-family: sans-serif; padding: 20px; line-height: 1.6; }
-        .log { background: #f4f4f4; padding: 10px; border: 1px solid #ddd; margin-top: 10px; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
-<body>
+<style>
+    #imageInput {
+    margin: 20px;
+ }
+  #previewImage {
+    margin: 20px;
+    border: 2px solid #ccc;
+ }
+ /*#############################################*/
+input::file-selector-button {
+    display: none; /**/     
+  background-color: dodgerblue;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
 
-    <h3>1. Liste déroulante (Immédiat)</h3>
-    <select id="mon-select">
-        <option value="">--Choisissez une option--</option>
-        <option value="javascript">JavaScript</option>
-        <option value="python">Python</option>
-    </select>
+input::file-selector-button:hover {
+  background-color: royalblue;
+  display: hi;
+}
+#previewImage{
+     border-radius: 50%;
+  width: 150px; /* Largeur et hauteur égales */
+  height: 150px;
+}
+</style>
+<body>          
+    
+        <label for="imageInput"><i></i>Choose a file:</label><br />
+        <input type="file" id="imageInput" accept="image/*">
+        
+        <img id="previewImage" src="#" alt="Prévisualisation" style="display:none; max-width: 300px, ;">
+        <script src="test.js" ></script>
 
-    <h3>2. Champ texte (Perte de focus)</h3>
-    <input type="text" id="mon-input" placeholder="Tapez puis cliquez ailleurs">
-
-    <h3>3. Case à cocher (Immédiat)</h3>
-    <label><input type="checkbox" id="ma-checkbox"> Accepter les conditions</label>
-
-    <div class="log">
-        <strong>Dernière action :</strong> <span id="output">Aucune</span>
-    </div>
-
-    <script>
-        const output = document.getElementById('output');
-
-        // Fonction pour afficher le résultat
-        const logChange = (message) => {
-            output.textContent = message;
-            console.log(message);
-        };
-
-        // Écouteur sur le SELECT
-        document.getElementById('mon-select').addEventListener('change', (e) => {
-            logChange(`Sélecteur : ${e.target.value}`);
-        });
-
-        // Écouteur sur l'INPUT (ne se lance que quand on quitte le champ)
-        document.getElementById('mon-input').addEventListener('change', (e) => {
-            logChange(`Input texte : ${e.target.value}`);
-        });
-
-        // Écouteur sur la CHECKBOX
-        document.getElementById('ma-checkbox').addEventListener('change', (e) => {
-            logChange(`Checkbox : ${e.target.checked ? 'Coché' : 'Décoché'}`);
-        });
-    </script>
 
 </body>
 </html>

@@ -1,6 +1,13 @@
  let input = document.querySelector("input");
  let form = document.querySelector("form");
- 
+ const imageInput = document.getElementById('imageInput');
+ const previewImage = document.getElementById('previewImage');
+ const icon = document.querySelector("i");
+
+ //console.log(icon)
+
+
+ console.log(imageInput);
 
 const postData = async (url, data) => {
   try {
@@ -24,41 +31,66 @@ const postData = async (url, data) => {
   }
 };
 
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-form.addEventListener("submit",(e)=>{
-    e.preventDefault();
-    let username = input.value.trim();
-    if(username == "" ){
-      document.getElementById("output").innerHTML =
-       "<div class='alert alert-danger'>Entrer un username svp !</div>";
-      setTimeout(() => {
-       document.getElementById("output").innerHTML =
-       "";
-      }, 2000);
-      return
+  let username = input.value.trim();
+
+  if (username === "") {
+    showError("Entrer un username svp !");
+    return;
+  }
+
+  if (username.length > 10) {
+    showError("Entrer au minimum 10 lettres !");
+    return;
+  }
+
+  const apiEndpoint = "http://localhost:3000/api/users";
+  const myData = { username : `${username}`};
+
+  const result = await postData(apiEndpoint, myData);
+console.log(result);
+  //  On vérifie si le serveur a répondu
+  if (result) { // si le backend retourne une reponse, ici id
+    window.location.replace("accueil.html");
+  } else {
+    showError("Erreur serveur !");
+  }
+});
+
+function showError(message) {
+  const output = document.getElementById("output");
+  output.innerHTML = `<div class='alert alert-danger'>${message}</div>`;
+
+  setTimeout(() => {
+    output.innerHTML = "";
+  }, 2000);
+}
+
+imageInput.addEventListener('change', function() {
+    //this referent a l'input
+    const file = this.files[0]; //accéder au premier fichier sélectionné par l'utilisateur dans un champ de saisie (<input type="file">).
+   //  console.log(file)
+    if (file){
+        const reader = new FileReader();
+        
+        // Lorsque le fichier est lu, mettre à jour la source de l'image
+        reader.onload = function(e) { // onload ecouteur d'evenement
+            const newImage = document.createElement("img");
+            newImage.src = e.target.result;
+            console.log(newImage)
+            newImage.style.borderRadius = "50%";
+            newImage.style.width= "100px";
+            newImage.style.height= "150px";
+            console.log(newImage);
+            icon.replaceWith(newImage);
+            
+            //previewImage.src = e.target.result; //e (ou event) est un objet qui contient toutes les informations sur l'événement qui vient de se produire.
+            //previewImage.style.display = 'block'; // Afficher l'image
+            
+        }
+        
+        reader.readAsDataURL(file); // Lire le fichier
     }
-    if(username.length > 10 ){
-       document.getElementById("output").innerHTML =
-       "<div class='alert alert-danger'>Entrer au minimum 10 lettres !</div>";
-      setTimeout(() => {
-       document.getElementById("output").innerHTML =
-       "";
-      }, 2000);
-      return
-    }
-    const apiEndpoint = 'http://localhost:3000/api/users'; 
-    const myData = {
-    username: `${username}`
-    };
-   postData(apiEndpoint, myData);
-   input.value = "";
-
-   setTimeout(() => {
-  window.location.replace("accueil.html");
-  }, 100);
-}) 
-
-
-
-
-
+});
