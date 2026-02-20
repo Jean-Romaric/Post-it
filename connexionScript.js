@@ -1,4 +1,4 @@
- let input = document.querySelector("input");
+ let input = document.getElementById("username");
  let form = document.querySelector("form");
  const imageInput = document.getElementById('imageInput');
  const previewImage = document.getElementById('previewImage');
@@ -7,7 +7,7 @@
  //console.log(icon)
 
 
- console.log(imageInput);
+ //console.log(imageInput);
 
 const postData = async (url, data) => {
   try {
@@ -34,7 +34,8 @@ const postData = async (url, data) => {
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  let username = input.value.trim();
+  let username = input.value;
+  //console.log(username)
 
   if (username === "") {
     showError("Entrer un username svp !");
@@ -46,11 +47,11 @@ form.addEventListener("submit", async (e) => {
     return;
   }
 
-  const apiEndpoint = "http://localhost:3000/api/users";
+  const apiEndpoint = "https://apipost-7o2w.onrender.com/api/users";
   const myData = { username : `${username}`};
 
   const result = await postData(apiEndpoint, myData);
-console.log(result);
+  //console.log(result);
   //  On vérifie si le serveur a répondu
   if (result) { // si le backend retourne une reponse, ici id
     window.location.replace("accueil.html");
