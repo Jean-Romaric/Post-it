@@ -2,10 +2,10 @@ body {
      margin: 0;
       background: #f0f2f5;
       font-family: sans-serif; 
-    background-image: url('images/ChatGPT\ Image\ 28\ déc.\ 2025\,\ 15_07_37.png'); /* Chemin de l'image */
-    background-size: cover;                /* Couvre tout l'écran */
-    background-position: center;           /* Centre l'image */
-    background-repeat: no-repeat;          /* Pas de répétition */
+    background-image: url('images/img.png'); 
+    background-size: cover;                
+    background-position: center;           
+    background-repeat: no-repeat;          
     background-attachment: fixed;  
     }
 .app{ 

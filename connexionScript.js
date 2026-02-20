@@ -14,16 +14,21 @@ const postData = async (url, data) => {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json' 
+        'Content-Type': 'application/json'  //je dis au serveur que les données que j’envoie sont au format JSON.{"username":"Jean"}
+          //"Content-Type" Le type de contenu envoyé dans le body de la requête.
+
       },
-      body: JSON.stringify(data) 
+      body: JSON.stringify(data) //je transformes mon objet JavaScript en texte JSON {"username":"Jean"}
     });
+      console.log(response);
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const responseData = await response.json(); 
+
+    const responseData = await response.json();//Lit le body de la réponse 
+                                              //Convertit le JSON en objet JavaScript
     return responseData;
 
   } catch (error) {
@@ -34,8 +39,7 @@ const postData = async (url, data) => {
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  let username = input.value;
-  //console.log(username)
+  let username = input.value.trim();
 
   if (username === "") {
     showError("Entrer un username svp !");
@@ -69,6 +73,7 @@ function showError(message) {
   }, 2000);
 }
 
+// Pour photo profil
 imageInput.addEventListener('change', function() {
     //this referent a l'input
     const file = this.files[0]; //accéder au premier fichier sélectionné par l'utilisateur dans un champ de saisie (<input type="file">).
